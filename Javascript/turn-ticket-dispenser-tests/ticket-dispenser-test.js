@@ -1,19 +1,24 @@
-/* globals describe, it */
-var chai = require('chai');
-chai.should();
+const chai = require('chai');
+const TicketDispenser = require('../turn-ticket-dispenser/ticket-dispenser.js');
 
-var TicketDispenser = require('../turn-ticket-dispenser/ticket-dispenser.js');
+chai.should();
 
 describe('Turn Ticket Dispenser', function() {
 
-	describe('TurnTicketDispenser', function() {
+    describe('TicketDispenser', function() {
 
-		it('foo', function() {
-			var dispenser = new TicketDispenser();
-			var ticket = dispenser.getTurnTicket();
-			ticket.turnNumber().should.equal(-1);
-		});
+        it('should issue unique turn numbers', function() {
+            const dispenser = new TicketDispenser();
+            const issuedTurnNumbers = new Set();
 
-	});
+            for (let i = 0; i < 100; i++) {
+                const ticket = dispenser.getTurnTicket();
+                const turnNumber = ticket.turnNumber();
+                issuedTurnNumbers.should.not.include(turnNumber);
+                issuedTurnNumbers.add(turnNumber);
+            }
+        });
+
+    });
 
 });
