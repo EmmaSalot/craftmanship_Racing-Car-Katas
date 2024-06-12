@@ -1,10 +1,10 @@
 var Sensor = require('./sensor.js');
 
-Alarm = function() {
-	this._lowPressureThreshold = 17;
-	this._highPressureThreshold = 21;
-	this._sensor = new Sensor();
-	this._alarmOn = false;
+Alarm = function(sensor) {
+    this._lowPressureThreshold = 17;
+    this._highPressureThreshold = 21;
+    this._sensor = sensor || new Sensor();
+    this._alarmOn = false;
 };
 
 Alarm.prototype = {
